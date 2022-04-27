@@ -1,0 +1,14 @@
+cmake_minimum_required(VERSION 3.21)
+project(Yukon C)
+
+set(CMAKE_C_STANDARD 11)
+
+set(SDL2_INCLUDE_DIR D:/Development/libs/SDL/include)
+set(SDL2_LIB_DIR D:/Development/libs/SDL/lib/x64)
+
+include_directories(${SDL2_INCLUDE_DIR})
+link_directories(${SDL2_LIB_DIR})
+
+add_executable(Yukon main.c)
+
+target_link_libraries(${PROJECT_NAME} SDL2main SDL2)

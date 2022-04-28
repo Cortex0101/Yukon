@@ -42,21 +42,8 @@ int main( int argc, char* args[]) {
         SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
         SDL_RenderClear( gRenderer );
 
-        // do stuff
-        /*
-        int h, w;
-        SDL_Texture *img = IMG_LoadTexture(gRenderer, "D:\\Development\\Yukon\\ressources\\card_deck.bmp");
-        SDL_QueryTexture(img, NULL, NULL, &w, &h); // get the width and height of the texture
-        SDL_Rect texr; texr.x = SCREEN_WIDTH/2; texr.y = SCREEN_HEIGHT/2; texr.w = w*2; texr.h = h*2;
-
-        SDL_RenderCopy(gRenderer, img, NULL, &texr);
-        */
-
-        //SDL_Rect *textureRects = getTextureRectsForDeck();
-        //SDL_RenderCopy(gRenderer, gCardDeck, textureRects, &card);
-
-        CardView cardd = getCard();
-        drawCard(&cardd);
+        CardView card = getCard();
+        drawCard(&card);
 
         //Update screen
         SDL_RenderPresent( gRenderer );

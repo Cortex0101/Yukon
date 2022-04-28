@@ -12,10 +12,10 @@
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 
-bool init();
-void close();
+bool initWindow();
+void closeWindow();
 
-bool init(int screenWidth, int screenHeight) {
+bool initWindow(int screenWidth, int screenHeight) {
     if( SDL_Init( SDL_INIT_VIDEO ) < 0 ) {
         printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
         return false;
@@ -42,7 +42,7 @@ bool init(int screenWidth, int screenHeight) {
     return true;
 }
 
-void close()
+void closeWindow()
 {
     SDL_DestroyRenderer( gRenderer );
     SDL_DestroyWindow( gWindow );

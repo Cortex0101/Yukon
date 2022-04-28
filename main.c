@@ -4,6 +4,7 @@ and may not be redistributed without written permission.*/
 //Using SDL, SDL_image, standard IO, math, and strings
 #include <SDL.h>
 #include <SDL_render.h>
+#include <SDL_image.h>
 #include <SDL_keyboard.h>
 #include <stdio.h>
 #include <string.h>
@@ -12,15 +13,19 @@ and may not be redistributed without written permission.*/
 
 #include "Card.h"
 #include "Window.h"
+#include "Ressources.h"
+#include "CardView.h"
 
-const SCREEN_WIDTH = 640;
-const SCREEN_HEIGHT = 320;
+const int SCREEN_WIDTH = 1280;
+const int SCREEN_HEIGHT = 720;
 
 int main( int argc, char* args[]) {
-    if( !init(SCREEN_WIDTH, SCREEN_HEIGHT) ) {
+    if( !initWindow(SCREEN_WIDTH, SCREEN_HEIGHT) ) {
         printf( "Failed to initialize!\n" );
         return -1;
     }
+
+    setupCardView();
 
     bool quit = false;
     SDL_Event e;
@@ -31,32 +36,34 @@ int main( int argc, char* args[]) {
             }
         }
 
+
+
         //Clear screen
         SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
         SDL_RenderClear( gRenderer );
 
-        //Render red filled quad
-        SDL_Rect fillRect = { SCREEN_WIDTH / 4, SCREEN_HEIGHT / 4, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 };
-        SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF );
-        SDL_RenderFillRect( gRenderer, &fillRect );
+        // do stuff
+        /*
+        int h, w;
+        SDL_Texture *img = IMG_LoadTexture(gRenderer, "D:\\Development\\Yukon\\ressources\\card_deck.bmp");
+        SDL_QueryTexture(img, NULL, NULL, &w, &h); // get the width and height of the texture
+        SDL_Rect texr; texr.x = SCREEN_WIDTH/2; texr.y = SCREEN_HEIGHT/2; texr.w = w*2; texr.h = h*2;
 
-        SDL_Rect outlineRect = { SCREEN_WIDTH / 6, SCREEN_HEIGHT / 6, SCREEN_WIDTH * 2 / 3, SCREEN_HEIGHT * 2 / 3 };
-        SDL_SetRenderDrawColor( gRenderer, 0x00, 0xFF, 0x00, 0xFF );
-        SDL_RenderDrawRect( gRenderer, &outlineRect );
+        SDL_RenderCopy(gRenderer, img, NULL, &texr);
+        */
 
-        SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0xFF, 0xFF );
-        SDL_RenderDrawLine( gRenderer, 0, SCREEN_HEIGHT / 2, SCREEN_WIDTH, SCREEN_HEIGHT / 2 );
+        //SDL_Rect *textureRects = getTextureRectsForDeck();
+        //SDL_RenderCopy(gRenderer, gCardDeck, textureRects, &card);
 
-        SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0x00, 0xFF );
-        for( int i = 0; i < SCREEN_HEIGHT; i += 4 )
-        {
-            SDL_RenderDrawPoint( gRenderer, SCREEN_WIDTH / 2, i );
-        }
+        CardView cardd = getCard();
+        drawCard(&cardd);
 
         //Update screen
         SDL_RenderPresent( gRenderer );
-        }
 
-    close();
+
+    }
+
+    closeWindow();
     return 0;
 }

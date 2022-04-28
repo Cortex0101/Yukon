@@ -10,9 +10,9 @@
 
 typedef enum {
     Clubs,
-    Diamonds,
+    Hearts,
     Spades,
-    Hearts
+    Diamonds
 } Suit;
 
 typedef struct {

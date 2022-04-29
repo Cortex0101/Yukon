@@ -13,8 +13,6 @@ typedef struct {
 
 } Column;
 
-bool isPlaceable(const Card* card) {
-
-}
+void
 
 #endif //YUKON_COLUMN_H

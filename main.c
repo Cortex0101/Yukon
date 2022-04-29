@@ -25,7 +25,7 @@ int main( int argc, char* args[]) {
         return -1;
     }
 
-    setupCardView();
+    loadCardTextureAndGenerateViews();
 
     bool quit = false;
     SDL_Event e;

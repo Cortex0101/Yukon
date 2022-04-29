@@ -10,6 +10,7 @@
 #include "Card.h"
 #include "Ressources.h"
 
+SDL_Texture *gCardDeck = NULL;
 SDL_Rect (*gCardViewRects)[13] = NULL;
 
 typedef struct {
@@ -22,11 +23,39 @@ typedef struct {
     Card card;
 } CardView;
 
-void setupCardView() {
-    loadCardDeckImage(); // must be called first
+// returns 13 * 4 = 52 rect's for each card in the card deck texture
+SDL_Rect (*getTextureRectsForDeck(void))[13] {
+    int TEXTURE_WIDTH;
+    int TEXTURE_HEIGHT;
+    SDL_QueryTexture(gCardDeck, NULL, NULL, &TEXTURE_WIDTH, &TEXTURE_HEIGHT);
+    const int NUM_SUITS = 4;
+    const int NUM_VALUES = 13;
+    const int CARD_WIDTH = TEXTURE_WIDTH / NUM_VALUES;
+    const int CARD_HEIGHT = TEXTURE_HEIGHT / NUM_SUITS;
+
+    static SDL_Rect rects[4][13];
+    for (int i = 0; i < NUM_SUITS; ++i) {
+        for (int j = 0; j < NUM_VALUES; ++j) {
+            SDL_Rect rect;
+            rect.x = CARD_WIDTH * j;
+            rect.y = CARD_HEIGHT * i;
+            rect.w = CARD_WIDTH;
+            rect.h = CARD_HEIGHT;
+            rects[i][j] = rect;
+        }
+    }
+
+    return rects;
+}
+
+// Make sure to call in main early.
+void loadCardTextureAndGenerateViews() {
+    gCardDeck = loadTexture("D:\\Development\\Yukon\\ressources\\card_deck.bmp");
     gCardViewRects = getTextureRectsForDeck();
 }
 
+// Generates a random card
+// Just for testing, remove later
 CardView getCard() {
     CardView cardView;
     cardView.width = 55;
@@ -43,6 +72,7 @@ CardView getCard() {
     return cardView;
 }
 
+// Draws a card to the screen
 void drawCard(const CardView* cardView) {
     SDL_Rect cardDimension;
     cardDimension.w = cardView->width;

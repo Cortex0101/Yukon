@@ -25,6 +25,8 @@ typedef struct {
 
 // returns 13 * 4 = 52 rect's for each card in the card deck texture
 SDL_Rect (*getTextureRectsForDeck(void))[13] {
+    int LEFT_PADDING = 2;
+    int TOP_PADDING = 0;
     int TEXTURE_WIDTH;
     int TEXTURE_HEIGHT;
     SDL_QueryTexture(gCardDeck, NULL, NULL, &TEXTURE_WIDTH, &TEXTURE_HEIGHT);
@@ -37,8 +39,8 @@ SDL_Rect (*getTextureRectsForDeck(void))[13] {
     for (int i = 0; i < NUM_SUITS; ++i) {
         for (int j = 0; j < NUM_VALUES; ++j) {
             SDL_Rect rect;
-            rect.x = CARD_WIDTH * j;
-            rect.y = CARD_HEIGHT * i;
+            rect.x = CARD_WIDTH * j + LEFT_PADDING;
+            rect.y = CARD_HEIGHT * i + TOP_PADDING;
             rect.w = CARD_WIDTH;
             rect.h = CARD_HEIGHT;
             rects[i][j] = rect;
@@ -56,20 +58,29 @@ void loadCardTextureAndGenerateViews() {
 
 // Generates a random card
 // Just for testing, remove later
-CardView getCard() {
+CardView getCard(int value, Suit suit) {
     CardView cardView;
-    cardView.width = 55;
-    cardView.height = 75;
+    cardView.width = 88;
+    cardView.height = 120;
     cardView.xPos = 0;
     cardView.yPos = 0;
 
     Card card;
-    card.suit = Spades;
-    card.value = 3;
+    card.suit = suit;
+    card.value = value;
     card.visible = true;
     cardView.card = card;
 
     return cardView;
+}
+
+void copyArray(CardView arr[], CardView copy[], int size)
+{
+    // loop to iterate through array
+    for (int i = 0; i < size; ++i)
+    {
+        copy[i] = arr[i];
+    }
 }
 
 // Draws a card to the screen

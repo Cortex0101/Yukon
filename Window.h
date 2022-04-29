@@ -25,7 +25,7 @@ bool initWindow(int screenWidth, int screenHeight) {
         printf( "Warning: Linear texture filtering not enabled!" );
     }
 
-    gWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screenWidth, screenHeight, SDL_WINDOW_SHOWN );
+    gWindow = SDL_CreateWindow( "Yukon solitaire", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screenWidth, screenHeight, SDL_WINDOW_SHOWN );
     if( gWindow == NULL ) {
         printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
         return false;

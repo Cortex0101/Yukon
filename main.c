@@ -59,13 +59,13 @@ int main( int argc, char* args[]) {
         SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
         SDL_RenderClear( gRenderer );
 
-        drawColumn(column, 13, 0);
-        drawColumn(column, 13, 1);
-        drawColumn(column, 13, 2);
-        drawColumn(column, 13, 3);
-        drawColumn(column, 13, 4);
-        drawColumn(column, 13, 5);
-        drawColumn(column, 13, 6);
+        drawColumn(column, 1, 0);
+        drawColumn(column, 6, 1);
+        drawColumn(column, 7, 2);
+        drawColumn(column, 8, 3);
+        drawColumn(column, 9, 4);
+        drawColumn(column, 10, 5);
+        drawColumn(column, 11, 6);
 
         //Update screen
         SDL_RenderPresent( gRenderer );

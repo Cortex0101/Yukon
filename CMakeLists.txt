@@ -9,6 +9,6 @@ set(SDL2_LIB_DIR C:/Development/libs/SDL/lib/x64)
 include_directories(${SDL2_INCLUDE_DIR})
 link_directories(${SDL2_LIB_DIR})
 
-add_executable(Yukon main.c Card.h Window.h CardView.h Ressources.h Column.h ColumnView.h)
+add_executable(Yukon main.c Card.h Window.h CardView.h Ressources.h Column.h ColumnView.h CardLinkedList.h)
 
 target_link_libraries(${PROJECT_NAME} SDL2main SDL2 SDL2_image)

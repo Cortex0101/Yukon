@@ -16,6 +16,8 @@ and may not be redistributed without written permission.*/
 #include "Ressources.h"
 #include "CardView.h"
 #include "ColumnView.h"
+#include "CardLinkedList.h"
+#include "Column.h"
 
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
@@ -29,20 +31,35 @@ int main( int argc, char* args[]) {
     loadCardTextureAndGenerateViews();
 
     CardView card1 = getCard(1, Hearts);
-    CardView card2 = getCard(2, Hearts);
+    CardView card2 = getCard(2, Clubs);
     CardView card3 = getCard(3, Spades);
-    CardView card4 = getCard(4, Spades);
+    CardView card4 = getCard(4, Hearts);
     CardView card5 = getCard(5, Clubs);
-    CardView card6 = getCard(6, Clubs);
-    CardView card7 = getCard(7, Diamonds);
-    CardView card8 = getCard(8, Diamonds);
+    CardView card6 = getCard(6,Spades);
+    CardView card7 = getCard(7, Clubs);
+    CardView card8 = getCard(8, Hearts);
     CardView card9 = getCard(9, Diamonds);
-    CardView card10 = getCard(10, Diamonds);
+    CardView card10 = getCard(10, Hearts);
     CardView card11 = getCard(11, Diamonds);
-    CardView card12 = getCard(12, Diamonds);
+    CardView card12 = getCard(12, Clubs);
     CardView card13 = getCard(13, Diamonds);
 
     CardView column[13] = {card1, card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12, card13};
+
+    /*Driver code to test the implementation*/
+    setActiveList(1);
+    initializeColumnLists();
+    insertCard(&card1.card, 1);
+    insertCard(&card2.card, 1);
+    insertCard(&card3.card, 1);
+    insertCard(&card4.card, 1);
+    insertCard(&card5.card, 1);
+
+    insertCard(&card6.card, 2);
+    insertCard(&card7.card, 2);
+    insertCard(&card8.card, 2);
+    insertCard(&card9.card, 2);
+    insertCard(&card10.card, 2);
 
     bool quit = false;
     SDL_Event e;
@@ -59,13 +76,8 @@ int main( int argc, char* args[]) {
         SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
         SDL_RenderClear( gRenderer );
 
-        drawColumn(column, 1, 0);
-        drawColumn(column, 6, 1);
-        drawColumn(column, 7, 2);
-        drawColumn(column, 8, 3);
-        drawColumn(column, 9, 4);
-        drawColumn(column, 10, 5);
-        drawColumn(column, 11, 6);
+        drawColumn(1);
+        drawColumn(2);
 
         //Update screen
         SDL_RenderPresent( gRenderer );

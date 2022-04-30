@@ -32,6 +32,11 @@ int cardCmp(const Card* card1, const Card* card2) {
     }
 }
 
+// returns true if card1 is 1 greater than card2
+bool isOneGreater(const Card* card1, const Card* card2) {
+    return (card1->value - 1) == card2->value;
+}
+
 bool cardsSameSuit(const Card* card1, const Card* card2) {
     return card1->suit == card2->suit;
 }

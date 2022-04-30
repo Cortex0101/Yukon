@@ -6,22 +6,40 @@
 #define YUKON_COLUMNVIEW_H
 
 #include "CardView.h"
+#include "Column.h"
 
 const int COLUMN_X = 10;
 const int COLUMN_Y = 10;
 
-void drawColumn(CardView cards[], int numCards, int column) {
-    if (numCards < 1)
+void drawColumn(int column) {
+    // Feel free to expirement with below parameters
+    const int COLUMN_VERTICAL_SPACING = 120 / 5;
+    const int COLUMN_HORIZONTAL_SPACING = (88 / 4) + 88;
+
+    setActiveList(column);
+    column -= 1; // simple hack..
+    struct Node* temp = heads[activeHead];
+
+    if (temp == NULL)
         return;
 
-    // Feel free to expirement with below parameters
-    const int COLUMN_VERTICAL_SPACING = cards[0].height / 5;
-    const int COLUMN_HORIZONTAL_SPACING = (cards[0].width / 4) + cards[0].width;
+    CardView cardView = getCard(temp->data.value, temp->data.suit);
+    cardView.xPos = (COLUMN_HORIZONTAL_SPACING * column) + COLUMN_X;
+    cardView.yPos = (COLUMN_VERTICAL_SPACING * 0) + COLUMN_Y;
+    drawCard(&cardView);
 
-    for (int i = 0; i < numCards; ++i) {
-        cards[i].xPos = (COLUMN_HORIZONTAL_SPACING * column) + COLUMN_X;
-        cards[i].yPos = (COLUMN_VERTICAL_SPACING * i) + COLUMN_Y;
-        drawCard(&cards[i]);
+    int i = 1;
+    while (true) {
+        if (temp->next != NULL) {
+            temp = temp->next;
+            cardView = getCard(temp->data.value, temp->data.suit);
+            cardView.xPos = (COLUMN_HORIZONTAL_SPACING * column) + COLUMN_X;
+            cardView.yPos = (COLUMN_VERTICAL_SPACING * i) + COLUMN_Y;
+            drawCard(&cardView);
+            ++i;
+        } else {
+            return;
+        }
     }
 }
 

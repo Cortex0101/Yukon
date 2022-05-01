@@ -15,6 +15,13 @@ typedef enum {
     Diamonds
 } Suit;
 
+static const char *CARD_SUITS_STRING[] = {
+        "Clubs",
+        "Hearts",
+        "Spades",
+        "Diamonds",
+};
+
 typedef struct {
     Suit suit;
     int value;

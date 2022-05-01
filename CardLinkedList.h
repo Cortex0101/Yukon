@@ -69,6 +69,19 @@ void insertAtTail(Card card) {
     temp->next = newNode;
     newNode->prev = temp;
 }
+struct Node* getHead() {
+    struct Node* temp = heads[activeHead];
+    if (temp == NULL) {
+        return heads[activeHead];
+    }
+    while(true) {
+        if (temp->prev != NULL) {
+            temp = temp->prev;
+        } else {
+            return temp;
+        }
+    }
+}
 
 struct Node* getTail() {
     struct Node* temp = heads[activeHead];
@@ -85,13 +98,18 @@ struct Node* getTail() {
 }
 
 //Prints all the elements in linked list in forward traversal order
-void print() {
+void print(int activeList) {
+    setActiveList(activeList);
     struct Node* temp = heads[activeHead];
-    printf("Forward: ");
+    int i = 0;
+    printf("Double Linked List Consists of: \n");
     while(temp != NULL) {
-        printf("%d%d ", temp->data.suit, temp->data.value);
+        i++;
+        printf("%d of %s \n", temp->data.value, CARD_SUITS_STRING[temp->data.suit-1]);
         temp = temp->next;
+
     }
+    printf("%d cards total", i);
     printf("\n");
 }
 

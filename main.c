@@ -18,6 +18,7 @@ and may not be redistributed without written permission.*/
 #include "ColumnView.h"
 #include "CardLinkedList.h"
 #include "Column.h"
+#include "Deck.h"
 
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;

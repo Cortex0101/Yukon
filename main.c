@@ -30,8 +30,6 @@ int main( int argc, char* args[]) {
     }
     createDeck();
     print(0);
-    removeTopCardOfDeck();
-    print(0);
     loadCardTextureAndGenerateViews();
 
     CardView card1 = getCard(1, Hearts);

@@ -28,7 +28,10 @@ int main( int argc, char* args[]) {
         printf( "Failed to initialize!\n" );
         return -1;
     }
-
+    createDeck();
+    print(0);
+    removeTopCardOfDeck();
+    print(0);
     loadCardTextureAndGenerateViews();
 
     CardView card1 = getCard(1, Hearts);

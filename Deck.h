@@ -11,8 +11,10 @@ void createDeck() {
     }
 }
 //Not sure if this needs to return the card or the node
-Card* removeTopCardOfDeck() {
+struct Node* removeTopCardOfDeck() {
     activeHead = 0;
-    struct Node* temp = getTail();
-    temp->prev->next = NULL;
+    struct Node* temp1 = getTail()->prev;
+    struct Node* temp2 = getTail();
+    temp1->next = NULL;
+    return temp2;
 }

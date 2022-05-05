@@ -18,7 +18,6 @@ and may not be redistributed without written permission.*/
 #include "ColumnView.h"
 #include "CardLinkedList.h"
 #include "Column.h"
-#include "Deck.h"
 
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
@@ -57,6 +56,8 @@ int main( int argc, char* args[]) {
     /*Driver code to test the implementation*/
     setActiveList(1);
     initializeColumnLists();
+
+    /*
     insertCard(&card1.card, 1);
     insertCard(&card2.card, 1);
     insertCard(&card3.card, 1);
@@ -68,6 +69,7 @@ int main( int argc, char* args[]) {
     insertCard(&card8.card, 2);
     insertCard(&card9.card, 2);
     insertCard(&card10.card, 2);
+    */
 
     bool quit = false;
     SDL_Event e;
@@ -86,6 +88,11 @@ int main( int argc, char* args[]) {
 
         drawColumn(1);
         drawColumn(2);
+        drawColumn(3);
+        drawColumn(4);
+        drawColumn(5);
+        drawColumn(6);
+        drawColumn(7);
 
         //Update screen
         SDL_RenderPresent( gRenderer );

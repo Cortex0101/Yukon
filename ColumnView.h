@@ -11,7 +11,7 @@
 const int COLUMN_X = 10;
 const int COLUMN_Y = 10;
 
-void drawColumn(int column) {
+void    drawColumn(int column) {
     // Feel free to expirement with below parameters
     const int COLUMN_VERTICAL_SPACING = 120 / 5;
     const int COLUMN_HORIZONTAL_SPACING = (88 / 4) + 88;

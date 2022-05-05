@@ -105,7 +105,7 @@ void print(int activeList) {
     printf("Double Linked List Consists of: \n");
     while(temp != NULL) {
         i++;
-        printf("%d of %s \n", temp->data.value, CARD_SUITS_STRING[temp->data.suit-1]);
+        printf("%d of %s \n", temp->data.value, CARD_SUITS_STRING[temp->data.suit]);
         temp = temp->next;
 
     }

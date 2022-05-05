@@ -79,6 +79,10 @@ CardView getCard(int value, Suit suit) {
     return cardView;
 }
 
+CardView getCardView(Card card) {
+    getCard(card.value, card.suit);
+}
+
 void copyArray(CardView arr[], CardView copy[], int size)
 {
     // loop to iterate through array

@@ -57,8 +57,8 @@ int main( int argc, char* args[]) {
     setActiveList(1);
     initializeColumnLists();
 
-    moveCards(2, 3, 5);
-    moveCards(3, 4, 6);
+    moveCardsWithoutRules(2, 3, 5);
+    moveCardsWithoutRules(3, 4, 6);
 
     bool quit = false;
     SDL_Event e;

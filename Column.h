@@ -9,6 +9,7 @@
 
 #include "Card.h"
 #include "CardLinkedList.h"
+#include "Deck.h"
 
 struct Node* column1Head = NULL;
 struct Node* column2Head = NULL;
@@ -35,6 +36,41 @@ void initializeColumnLists() {
     columns[4] = column5Head;
     columns[5] = column6Head;
     columns[6] = column7Head;
+
+    setActiveList(1);
+    insertAtTail(removeTopCardOfDeck()->data);
+
+    setActiveList(2);
+    for (int i = 0; i < 6; ++i) {
+        Card card = removeTopCardOfDeck()->data;
+        insertAtTail(card);
+    }
+
+    setActiveList(3);
+    for (int i = 0; i < 7; ++i) {
+        Card card = removeTopCardOfDeck()->data;
+        insertAtTail(card);
+    }
+
+    setActiveList(4);
+    for (int i = 0; i < 8; ++i) {
+        insertAtTail(removeTopCardOfDeck()->data);
+    }
+
+    setActiveList(5);
+    for (int i = 0; i < 9; ++i) {
+        insertAtTail(removeTopCardOfDeck()->data);
+    }
+
+    setActiveList(6);
+    for (int i = 0; i < 10; ++i) {
+        insertAtTail(removeTopCardOfDeck()->data);
+    }
+
+    setActiveList(7);
+    for (int i = 0; i < 11; ++i) {
+        insertAtTail(removeTopCardOfDeck()->data);
+    }
 }
 
 // Check if 'card' is placeable in the column with the head 'columnHead'
@@ -57,6 +93,17 @@ bool insertCard(const Card* card, int column) {
         return true;
     }
     return false;
+}
+
+// moving without rules - primarly for debugging.
+bool moveCardsWithoutRules(int fromColumn, int toColumn, int amount) {
+    setActiveList(fromColumn);
+    struct Node* fromCard = getElementFromTail(amount - 1);
+    getElementFromTail(amount)->next = NULL;
+    setActiveList(toColumn);
+    struct Node* tail = getTail();
+    tail->next = fromCard;
+    fromCard->prev = tail;
 }
 
 Card* getTopCard(int column) {

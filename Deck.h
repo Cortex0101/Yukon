@@ -5,10 +5,13 @@
 #include <stdlib.h>
 #include <time.h>
 
+#ifndef YUKON_DECK_H
+#define YUKON_DECK_H
+
 void createDeck() {
     setActiveList(0);
     for (int i = 1; i < 14; ++i) {
-        for (int j = 1; j < 5; ++j) {
+        for (int j = 0; j < 4; ++j) {
             Card *card = (Card *) malloc(sizeof(Card));
             card->value = i;
             card->suit = j;
@@ -18,16 +21,18 @@ void createDeck() {
 }
 //Not sure if this needs to return the card or the node
 struct Node* removeTopCardOfDeck() {
+    int previousActive = activeHead;
     setActiveList(0);
-    activeHead = 0;
     if (getTail()->prev != NULL) {
         struct Node *temp1 = getTail()->prev;
         struct Node *temp2 = getTail();
         if (temp1->next != NULL) {
             temp1->next = NULL;
+            setActiveList(previousActive);
             return temp2;
         }
     }
+    setActiveList(previousActive);
     return getTail();
 
 
@@ -66,3 +71,5 @@ void shuffleDeckRandom(){
 void shuffleDeckInterleaved(){
 
 }
+
+#endif

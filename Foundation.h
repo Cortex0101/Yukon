@@ -1,6 +1,9 @@
 #include "Card.h"
 #include "CardLinkedList.h"
 
+#ifndef YUKON_FOUNDATION_H
+#define YUKON_FOUNDATION_H
+
 int getSuit(int foundationNo) {
     activeHead = foundationNo;
     return getTail()->data.suit;
@@ -39,3 +42,5 @@ void placeCard(Card card, int foundationNo) {
         insertAtHead(card);
     }
 }
+
+#endif

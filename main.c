@@ -57,19 +57,8 @@ int main( int argc, char* args[]) {
     setActiveList(1);
     initializeColumnLists();
 
-    /*
-    insertCard(&card1.card, 1);
-    insertCard(&card2.card, 1);
-    insertCard(&card3.card, 1);
-    insertCard(&card4.card, 1);
-    insertCard(&card5.card, 1);
-
-    insertCard(&card6.card, 2);
-    insertCard(&card7.card, 2);
-    insertCard(&card8.card, 2);
-    insertCard(&card9.card, 2);
-    insertCard(&card10.card, 2);
-    */
+    moveCards(2, 3, 5);
+    moveCards(3, 4, 6);
 
     bool quit = false;
     SDL_Event e;

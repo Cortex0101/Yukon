@@ -97,6 +97,32 @@ struct Node* getTail() {
     }
 }
 
+struct Node* getElementFromHead(int j) {
+    struct Node* temp = getHead();
+    for (int i = 0; i < j; ++i) {
+        if (temp != NULL) {
+            temp = temp->next;
+        } else {
+            printf("No more cards to iterate over!");
+            return temp;
+        }
+    }
+    return temp;
+}
+
+struct Node* getElementFromTail(int j) {
+    struct Node* temp = getTail();
+    for (int i = 0; i < j; ++i) {
+        if (temp != NULL) {
+            temp = temp->prev;
+        } else {
+            printf("No more cards to iterate over!");
+            return temp;
+        }
+    }
+    return temp;
+}
+
 //Prints all the elements in linked list in forward traversal order
 void print(int activeList) {
     setActiveList(activeList);

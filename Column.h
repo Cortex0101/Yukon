@@ -95,6 +95,17 @@ bool insertCard(const Card* card, int column) {
     return false;
 }
 
+// moving without rules - primarly for debugging.
+bool moveCardsWithoutRules(int fromColumn, int toColumn, int amount) {
+    setActiveList(fromColumn);
+    struct Node* fromCard = getElementFromTail(amount - 1);
+    getElementFromTail(amount)->next = NULL;
+    setActiveList(toColumn);
+    struct Node* tail = getTail();
+    tail->next = fromCard;
+    fromCard->prev = tail;
+}
+
 Card* getTopCard(int column) {
     setActiveList(column);
     return &getTail()->data;

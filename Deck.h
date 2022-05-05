@@ -6,6 +6,7 @@
 #include <time.h>
 
 void createDeck() {
+    setActiveList(0);
     for (int i = 1; i < 14; ++i) {
         for (int j = 1; j < 5; ++j) {
             Card *card = (Card *) malloc(sizeof(Card));
@@ -17,6 +18,7 @@ void createDeck() {
 }
 //Not sure if this needs to return the card or the node
 struct Node* removeTopCardOfDeck() {
+    setActiveList(0);
     activeHead = 0;
     if (getTail()->prev != NULL) {
         struct Node *temp1 = getTail()->prev;

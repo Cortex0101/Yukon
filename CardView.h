@@ -52,7 +52,12 @@ SDL_Rect (*getTextureRectsForDeck(void))[13] {
 
 // Make sure to call in main early.
 void loadCardTextureAndGenerateViews() {
-    gCardDeck = loadTexture("C:\\Users\\augus\\CLionProjects\\Yukon\\ressources\\card_deck.bmp");
+    char* cardDeck = "card_deck.bmp";
+    char* cardDeckPath = malloc(strlen(resources_folder) + strlen(cardDeck));
+    strcpy(cardDeckPath, resources_folder);
+    strcat(cardDeckPath, cardDeck);
+    printf(cardDeckPath);
+    gCardDeck = loadTexture(cardDeckPath);
     gCardViewRects = getTextureRectsForDeck();
 }
 

@@ -24,6 +24,10 @@ const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
 
 int main( int argc, char* args[]) {
+    executable_location = args[0];
+    resources_folder = getRessourcesFolder(executable_location);
+
+    printf(resources_folder);
     if( !initWindow(SCREEN_WIDTH, SCREEN_HEIGHT) ) {
         printf( "Failed to initialize!\n" );
         return -1;

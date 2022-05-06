@@ -63,7 +63,7 @@ void shuffleDeckRandom(){
     randomize (pointerValueArray, 52);
     addHead(&cardArray[pointerValueArray[0]],0);
     for (int i = 1; i < 52; ++i) {
-        insertAtTail(cardArray[pointerValueArray[i]].data);
+        insertAtHead(cardArray[pointerValueArray[i]].data);
     }
 }
 

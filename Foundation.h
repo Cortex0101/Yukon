@@ -5,11 +5,10 @@
 #define YUKON_FOUNDATION_H
 
 int getSuit(int foundationNo) {
-    activeHead = foundationNo;
-    return getTail()->data.suit;
+    return foundationNo - 7;
 }
 
-Card getTopCard(int foundationNo) {
+Card getTopCardOfFoundation(int foundationNo) {
     activeHead = foundationNo;
     return getHead()->data;
 }
@@ -24,22 +23,22 @@ bool stackIsEmpty(int foundationNo) {
 
 bool stackIsFull(int foundationNo) {
     activeHead = foundationNo;
-    if (getTopCard(foundationNo).value == 13) {
+    if (getTopCardOfFoundation(foundationNo).value == 13) {
         return true;
     }
     return false;
 }
 
-bool isPlaceable(Card card, int foundationNo) {
-    if ((card.suit == getSuit(foundationNo) && !stackIsFull(foundationNo)) || stackIsEmpty(foundationNo)) {
+bool isPlaceableInFoundation(Card card, int foundationNo) {
+    if (card.suit == getSuit(foundationNo) && !stackIsFull(foundationNo) && ((!stackIsEmpty(foundationNo) && card.value == getTopCardOfFoundation(foundationNo).value + 1) || (stackIsEmpty(foundationNo) && card.value == 1))) {
         return true;
     }
     return false;
 }
 
 void placeCard(Card card, int foundationNo) {
-    if(isPlaceable(card, foundationNo)) {
-        insertAtHead(card);
+    if(isPlaceableInFoundation(card, foundationNo)) {
+        insertAtTail(card);
     }
 }
 

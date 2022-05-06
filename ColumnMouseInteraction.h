@@ -65,17 +65,21 @@ int getCardBasedOnXY(int mouseXPos, int mouseYPos) {
 
 bool mouseButtonDown;
 bool callOnce = false;
+int priv_column;
+int priv_card;
 
 void columnHandleMouseEvent(SDL_Event* mouseEvent) {
     if (mouseEvent->type == SDL_MOUSEBUTTONDOWN) {
         mouseButtonDown = true;
     } else if (mouseEvent->type == SDL_MOUSEBUTTONUP) {
         mouseButtonDown = false;
+        int mousePosX, mousePosY;
+        SDL_GetMouseState(&mousePosX, &mousePosY);
+        printf("%c%", priv_card + '0');
+        //moveCardsWithoutRules(priv_column, getColumnBasedOnMouseXPos(mousePosX), getColumnSize(priv_column) - (priv_card - 1));
+        moveCards(priv_column, getColumnBasedOnMouseXPos(mousePosX), getColumnSize(priv_column) - (priv_card - 1));
     }
 }
-
-int priv_column;
-int priv_card;
 
 void columnUpdateMouse() {
     int mousePosX, mousePosY;

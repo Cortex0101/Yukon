@@ -75,14 +75,18 @@ void initializeColumnLists() {
 
 // Check if 'card' is placeable in the column with the head 'columnHead'
 bool isPlaceable(const Card* card, int column) {
+    int prevActive = activeHead;
     setActiveList(column);
     struct Node* columnTail = getTail();
     if (columnTail == NULL) {
+        setActiveList(prevActive);
         return true; // can place if there is no cards in column
     }
-    if (isOneGreater(card, &columnTail->data) && !cardsSameSuit(card, &columnTail->data)) {
+    if (isOneGreater(&columnTail->data, card) && !cardsSameSuit(card, &columnTail->data)) {
+        setActiveList(prevActive);
         return true;
     }
+    setActiveList(prevActive);
     return false;
 }
 
@@ -96,14 +100,45 @@ bool insertCard(const Card* card, int column) {
 }
 
 // moving without rules - primarly for debugging.
-bool moveCardsWithoutRules(int fromColumn, int toColumn, int amount) {
+void moveCardsWithoutRules(int fromColumn, int toColumn, int amount) {
     setActiveList(fromColumn);
     struct Node* fromCard = getElementFromTail(amount - 1);
-    getElementFromTail(amount)->next = NULL;
+    if (getElementFromTail(amount) != NULL) {
+        getElementFromTail(amount)->next = NULL;
+    } else {
+        addHead(NULL, fromColumn);
+    }
     setActiveList(toColumn);
     struct Node* tail = getTail();
-    tail->next = fromCard;
-    fromCard->prev = tail;
+    if (tail != NULL) {
+        tail->next = fromCard;
+        fromCard->prev = tail;
+    } else {
+        addHead(fromCard, toColumn);
+    }
+}
+
+// moving without rules - primarly for debugging.
+bool moveCards(int fromColumn, int toColumn, int amount) {
+    setActiveList(fromColumn);
+    struct Node* fromCard = getElementFromTail(amount - 1);
+    if (isPlaceable(&fromCard->data, toColumn)) {
+        if (getElementFromTail(amount) != NULL) {
+            getElementFromTail(amount)->next = NULL;
+        } else {
+            addHead(NULL, fromColumn);
+        }
+        setActiveList(toColumn);
+        struct Node* tail = getTail();
+        if (tail != NULL) {
+            tail->next = fromCard;
+            fromCard->prev = tail;
+        } else {
+            addHead(fromCard, toColumn);
+        }
+        return true;
+    }
+    return false;
 }
 
 Card* getTopCard(int column) {

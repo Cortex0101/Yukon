@@ -17,15 +17,15 @@ void    drawFoundation(int foundation) {
     const int FOUNDATION_HORIZONTAL_SPACING = (88 / 4) + 88;
 
     setActiveList(foundation);
-    foundation -= 1; // simple hack..
+    foundation -= 8; // simple hack..
     struct Node* temp = heads[activeHead];
 
     if (temp == NULL)
         return;
 
     CardView cardView = getCard(temp->data.value, temp->data.suit);
-    cardView.xPos = (FOUNDATION_HORIZONTAL_SPACING * foundation) + FOUNDATION_X;
-    cardView.yPos = FOUNDATION_Y;
+    cardView.xPos = (FOUNDATION_HORIZONTAL_SPACING * 8) + FOUNDATION_X;
+    cardView.yPos = FOUNDATION_Y * (15 * foundation) + COLUMN_Y;
     drawCard(&cardView);
 
     int i = 1;

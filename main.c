@@ -19,6 +19,8 @@ and may not be redistributed without written permission.*/
 #include "CardLinkedList.h"
 #include "Column.h"
 #include "ColumnMouseInteraction.h"
+#include "Foundation.h"
+#include "FoundationView.h"
 
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
@@ -33,6 +35,7 @@ int main( int argc, char* args[]) {
         return -1;
     }
     createDeck();
+    shuffleDeckRandom();
     print(0);
     loadCardTextureAndGenerateViews();
 

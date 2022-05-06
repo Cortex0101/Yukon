@@ -18,6 +18,7 @@ and may not be redistributed without written permission.*/
 #include "ColumnView.h"
 #include "CardLinkedList.h"
 #include "Column.h"
+#include "ColumnMouseInteraction.h"
 
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
@@ -33,8 +34,6 @@ int main( int argc, char* args[]) {
     }
     createDeck();
     print(0);
-    //shuffleDeckRandom();
-    //printf(0);
     loadCardTextureAndGenerateViews();
 
     CardView card1 = getCard(1, Hearts);
@@ -66,6 +65,8 @@ int main( int argc, char* args[]) {
         while( SDL_PollEvent( &e ) != 0 ) {
             if( e.type == SDL_QUIT ) {
                 quit = true;
+            } else if (e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP || SDL_MOUSEMOTION) {
+                columnHandleMouseEvent(&e);
             }
         }
 
@@ -75,13 +76,15 @@ int main( int argc, char* args[]) {
         SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
         SDL_RenderClear( gRenderer );
 
-        drawColumn(1);
-        drawColumn(2);
-        drawColumn(3);
-        drawColumn(4);
-        drawColumn(5);
-        drawColumn(6);
-        drawColumn(7);
+        if (priv_column != 1 || !mouseButtonDown) drawColumn(1);
+        if (priv_column != 2 || !mouseButtonDown) drawColumn(2);
+        if (priv_column != 3 || !mouseButtonDown) drawColumn(3);
+        if (priv_column != 4 || !mouseButtonDown) drawColumn(4);
+        if (priv_column != 5 || !mouseButtonDown) drawColumn(5);
+        if (priv_column != 6 || !mouseButtonDown) drawColumn(6);
+        if (priv_column != 7 || !mouseButtonDown) drawColumn(7);
+
+        columnUpdateMouse();
 
         //Update screen
         SDL_RenderPresent( gRenderer );

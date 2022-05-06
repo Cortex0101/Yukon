@@ -123,6 +123,16 @@ struct Node* getElementFromTail(int j) {
     return temp;
 }
 
+int getSize() {
+    struct Node* temp = heads[activeHead];
+    int i = 0;
+    while(temp != NULL) {
+        ++i;
+        temp = temp->next;
+    }
+    return i;
+}
+
 //Prints all the elements in linked list in forward traversal order
 void print(int activeList) {
     setActiveList(activeList);

@@ -13,6 +13,9 @@
 SDL_Texture *gCardDeck = NULL;
 SDL_Rect (*gCardViewRects)[13] = NULL;
 
+const int CARDVIEW_WIDTH = 88;
+const int CARDVIEW_HEIGHT = 120;
+
 typedef struct {
     int width;
     int height;
@@ -65,8 +68,8 @@ void loadCardTextureAndGenerateViews() {
 // Just for testing, remove later
 CardView getCard(int value, Suit suit) {
     CardView cardView;
-    cardView.width = 88;
-    cardView.height = 120;
+    cardView.width = CARDVIEW_WIDTH;
+    cardView.height = CARDVIEW_HEIGHT;
     cardView.xPos = 0;
     cardView.yPos = 0;
 

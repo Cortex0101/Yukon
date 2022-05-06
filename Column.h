@@ -111,6 +111,13 @@ Card* getTopCard(int column) {
     return &getTail()->data;
 }
 
+int getColumnSize(int column) {
+    int prevActive = activeHead;
+    setActiveList(column);
+    int size = getSize();
+    setActiveList(prevActive);
+    return size;
+}
 
 
 #endif //YUKON_COLUMN_H

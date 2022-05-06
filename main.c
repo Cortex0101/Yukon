@@ -18,6 +18,8 @@ and may not be redistributed without written permission.*/
 #include "ColumnView.h"
 #include "CardLinkedList.h"
 #include "Column.h"
+#include "Foundation.h"
+#include "FoundationView.h"
 
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
@@ -33,8 +35,8 @@ int main( int argc, char* args[]) {
     }
     createDeck();
     print(0);
-    //shuffleDeckRandom();
-    //printf(0);
+    shuffleDeckRandom();
+    print(0);
     loadCardTextureAndGenerateViews();
 
     CardView card1 = getCard(1, Hearts);
@@ -56,6 +58,7 @@ int main( int argc, char* args[]) {
     /*Driver code to test the implementation*/
     setActiveList(1);
     initializeColumnLists();
+
 
     moveCardsWithoutRules(2, 3, 5);
     moveCardsWithoutRules(3, 4, 6);

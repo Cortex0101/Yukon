@@ -42,6 +42,11 @@ int main( int argc, char* args[]) {
     setActiveList(1);
     initializeColumnLists();
 
+    placeCard(getCard(1, Clubs).card, 8);
+    placeCard(getCard(1, Hearts).card, 9);
+    placeCard(getCard(1, Spades).card, 10);
+    placeCard(getCard(1, Diamonds).card, 11);
+
     bool quit = false;
     SDL_Event e;
     while( !quit ) {
@@ -64,6 +69,10 @@ int main( int argc, char* args[]) {
         if (priv_column != 6 || !mouseButtonDown) drawColumn(6);
         if (priv_column != 7 || !mouseButtonDown) drawColumn(7);
 
+        drawFoundation(8);
+        drawFoundation(9);
+        drawFoundation(10);
+        drawFoundation(11);
         columnUpdateMouse();
 
         SDL_RenderPresent( gRenderer );

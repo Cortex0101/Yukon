@@ -76,7 +76,6 @@ void columnHandleMouseEvent(SDL_Event* mouseEvent) {
         int mousePosX, mousePosY;
         SDL_GetMouseState(&mousePosX, &mousePosY);
         printf("%c%", priv_card + '0');
-        //moveCardsWithoutRules(priv_column, getColumnBasedOnMouseXPos(mousePosX), getColumnSize(priv_column) - (priv_card - 1));
         moveCards(priv_column, getColumnBasedOnMouseXPos(mousePosX), getColumnSize(priv_column) - (priv_card - 1));
     }
 }

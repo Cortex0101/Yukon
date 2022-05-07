@@ -11,15 +11,20 @@
 const int FOUNDATION_X = 10;
 const int FOUNDATION_Y = 10;
 
-void    drawFoundation(int foundation) {
+void drawFoundation(int foundation) {
     // Feel free to expirement with below parameters
     const int FOUNDATION_VERTICAL_SPACING = 120 / 5;
     const int FOUNDATION_HORIZONTAL_SPACING = (88 / 4) + 88;
+
+    const int FOUNDATION_OUTLINE = 3;
 
     setActiveList(foundation);
     foundation -= 8; // simple hack..
     struct Node* temp = heads[activeHead];
 
+    SDL_Rect foundationRect = {((FOUNDATION_HORIZONTAL_SPACING * 8) + FOUNDATION_X) - FOUNDATION_OUTLINE, (FOUNDATION_Y * (15 * foundation) + COLUMN_Y) - FOUNDATION_OUTLINE, CARDVIEW_WIDTH + FOUNDATION_OUTLINE * 2, CARDVIEW_HEIGHT + FOUNDATION_OUTLINE * 2};
+    SDL_SetRenderDrawColor( gRenderer, 220, 220, 220, 0xFF );
+    SDL_RenderFillRect(gRenderer, &foundationRect);
     if (temp == NULL)
         return;
 
@@ -41,6 +46,10 @@ void    drawFoundation(int foundation) {
             return;
         }
     }
+}
+
+void drawFoundationsOutlines() {
+
 }
 
 #endif //YUKON_COLUMNVIEW_H

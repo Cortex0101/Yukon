@@ -118,7 +118,6 @@ void moveCardsWithoutRules(int fromColumn, int toColumn, int amount) {
     }
 }
 
-// moving without rules - primarly for debugging.
 bool moveCards(int fromColumn, int toColumn, int amount) {
     setActiveList(fromColumn);
     struct Node* fromCard = getElementFromTail(amount - 1);
@@ -142,8 +141,11 @@ bool moveCards(int fromColumn, int toColumn, int amount) {
 }
 
 Card* getTopCard(int column) {
+    int privActive = activeHead;
     setActiveList(column);
-    return &getTail()->data;
+    Card* card = &getTail()->data;
+    setActiveList(privActive);
+    return card;
 }
 
 int getColumnSize(int column) {

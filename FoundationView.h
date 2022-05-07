@@ -10,14 +10,12 @@
 
 const int FOUNDATION_X = 10;
 const int FOUNDATION_Y = 10;
+const int FOUNDATION_VERTICAL_SPACING = 120 / 5;
+const int FOUNDATION_HORIZONTAL_SPACING = (88 / 4) + 88;
+
+const int FOUNDATION_OUTLINE = 3;
 
 void drawFoundation(int foundation) {
-    // Feel free to expirement with below parameters
-    const int FOUNDATION_VERTICAL_SPACING = 120 / 5;
-    const int FOUNDATION_HORIZONTAL_SPACING = (88 / 4) + 88;
-
-    const int FOUNDATION_OUTLINE = 3;
-
     setActiveList(foundation);
     foundation -= 8; // simple hack..
     struct Node* temp = heads[activeHead];
@@ -27,6 +25,13 @@ void drawFoundation(int foundation) {
     SDL_RenderFillRect(gRenderer, &foundationRect);
     if (temp == NULL)
         return;
+
+    CardView view = getCard(getTail()->data.value, getTail()->data.suit);
+    view.xPos = (FOUNDATION_HORIZONTAL_SPACING * 8) + FOUNDATION_X;
+    view.yPos = FOUNDATION_Y * (15 * foundation) + COLUMN_Y;
+    drawCard(&view);
+
+    /*
 
     CardView cardView = getCard(temp->data.value, temp->data.suit);
     cardView.xPos = (FOUNDATION_HORIZONTAL_SPACING * 8) + FOUNDATION_X;
@@ -46,10 +51,6 @@ void drawFoundation(int foundation) {
             return;
         }
     }
+     */
 }
-
-void drawFoundationsOutlines() {
-
-}
-
 #endif //YUKON_COLUMNVIEW_H

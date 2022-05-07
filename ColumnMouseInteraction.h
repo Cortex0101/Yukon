@@ -6,6 +6,8 @@
 #define YUKON_COLUMNMOUSEINTERACTION_H
 
 #include "ColumnView.h"
+#include "Foundation.h"
+#include "FoundationView.h"
 
 int getColumnBasedOnMouseXPos(int mouseXPos) {
     const int COLUMN1_XPOS1 = (COLUMN_HORIZONTAL_SPACING * 0) + COLUMN_X;
@@ -29,6 +31,9 @@ int getColumnBasedOnMouseXPos(int mouseXPos) {
     const int COLUMN7_XPOS1 = (COLUMN_HORIZONTAL_SPACING * 6) + COLUMN_X;
     const int COLUMN7_XPOS2 = COLUMN7_XPOS1 + CARDVIEW_WIDTH;
 
+    const int FOUNDATIONS_XPOS1 = (COLUMN_HORIZONTAL_SPACING * 8) + COLUMN_X;
+    const int FOUNDATIONS_XPOS2 = FOUNDATIONS_XPOS1 + CARDVIEW_WIDTH;
+
     if (mouseXPos >= COLUMN1_XPOS1 && mouseXPos <= COLUMN1_XPOS2) {
         return 1;
     } else if (mouseXPos >= COLUMN2_XPOS1 && mouseXPos <= COLUMN2_XPOS2) {
@@ -43,6 +48,8 @@ int getColumnBasedOnMouseXPos(int mouseXPos) {
         return 6;
     } else if (mouseXPos >= COLUMN7_XPOS1 && mouseXPos <= COLUMN7_XPOS2) {
         return 7;
+    } else if (mouseXPos >= FOUNDATIONS_XPOS1 && mouseXPos <= FOUNDATIONS_XPOS2) {
+        return 9;
     } else {
         return 0;
     }
@@ -68,6 +75,32 @@ bool callOnce = false;
 int priv_column;
 int priv_card;
 
+int getFoundationBasedOnMouseYPos(int mouseYPos) {
+    const int FOUNDATION1_YPOS1 = (FOUNDATION_Y * (15 * 0) + COLUMN_Y) - FOUNDATION_OUTLINE;
+    const int FOUNDATION1_YPOS2 = FOUNDATION1_YPOS1 + CARDVIEW_HEIGHT + FOUNDATION_OUTLINE * 2;
+
+    const int FOUNDATION2_YPOS1 = (FOUNDATION_Y * (15 * 1) + COLUMN_Y) - FOUNDATION_OUTLINE;
+    const int FOUNDATION2_YPOS2 = FOUNDATION2_YPOS1 + CARDVIEW_HEIGHT + FOUNDATION_OUTLINE * 2;
+
+    const int FOUNDATION3_YPOS1 = (FOUNDATION_Y * (15 * 2) + COLUMN_Y) - FOUNDATION_OUTLINE;
+    const int FOUNDATION3_YPOS2 = FOUNDATION3_YPOS1 + CARDVIEW_HEIGHT + FOUNDATION_OUTLINE * 2;
+
+    const int FOUNDATION4_YPOS1 = (FOUNDATION_Y * (15 * 3) + COLUMN_Y) - FOUNDATION_OUTLINE;
+    const int FOUNDATION4_YPOS2 = FOUNDATION4_YPOS1 + CARDVIEW_HEIGHT + FOUNDATION_OUTLINE * 2;
+
+    if (mouseYPos >= FOUNDATION1_YPOS1 && mouseYPos <= FOUNDATION1_YPOS2) {
+        return 1;
+    } else if (mouseYPos >= FOUNDATION2_YPOS1 && mouseYPos <= FOUNDATION2_YPOS2) {
+        return 2;
+    } else if (mouseYPos >= FOUNDATION3_YPOS1 && mouseYPos <= FOUNDATION3_YPOS2) {
+        return 3;
+    } else if (mouseYPos >= FOUNDATION4_YPOS1 && mouseYPos <= FOUNDATION4_YPOS2) {
+        return 4;
+    } else {
+        return 0;
+    }
+}
+
 void columnHandleMouseEvent(SDL_Event* mouseEvent) {
     if (mouseEvent->type == SDL_MOUSEBUTTONDOWN) {
         mouseButtonDown = true;
@@ -76,7 +109,17 @@ void columnHandleMouseEvent(SDL_Event* mouseEvent) {
         int mousePosX, mousePosY;
         SDL_GetMouseState(&mousePosX, &mousePosY);
         printf("%c%", priv_card + '0');
-        moveCards(priv_column, getColumnBasedOnMouseXPos(mousePosX), getColumnSize(priv_column) - (priv_card - 1));
+        if (getColumnBasedOnMouseXPos(mousePosX) != 9) {
+            moveCards(priv_column, getColumnBasedOnMouseXPos(mousePosX), getColumnSize(priv_column) - (priv_card - 1));
+        } else {
+            if (priv_card == getColumnSize(priv_column)) {
+                int foundation = getFoundationBasedOnMouseYPos(mousePosY);
+                if (foundation != 0)
+                    placeCard(getTopCard(priv_column), foundation + 7);
+            } else {
+                printf("Can only place 1 card i foundation at a time!\n");
+            }
+        }
     }
 }
 

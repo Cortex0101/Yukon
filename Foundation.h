@@ -11,11 +11,12 @@ int getSuit(int foundationNo) {
 Card getTopCardOfFoundation(int foundationNo) {
     int prevActive = activeHead;
     setActiveList(foundationNo);
-    if (getHead() != NULL) {
-        Card card = getHead()->data;
+    if (getTail() != NULL) {
+        Card card = getTail()->data;
         setActiveList(prevActive);
         return card;
     }
+    setActiveList(prevActive);
     return getCard(2, Spades).card; // TODO: Return an invalid card...
 }
 
@@ -38,19 +39,55 @@ bool stackIsFull(int foundationNo) {
 }
 
 bool isPlaceableInFoundation(Card card, int foundationNo) {
-    if (card.suit == getSuit(foundationNo) && !stackIsFull(foundationNo) && ((!stackIsEmpty(foundationNo) && card.value == getTopCardOfFoundation(foundationNo).value + 1) || (stackIsEmpty(foundationNo) && card.value == 1))) {
-        return true;
+    if (card.suit == getSuit(foundationNo) && !stackIsFull(foundationNo)) {
+        if (stackIsEmpty(foundationNo)) {
+            if (card.value == 1) {
+                return true;
+            }
+        } else {
+            if (card.value == getTopCardOfFoundation(foundationNo).value + 1) {
+                return true;
+            }
+        }
     }
     return false;
 }
 
-void placeCard(Card card, int foundationNo) {
-    if(isPlaceableInFoundation(card, foundationNo)) {
+void placeCard(Card* card, int foundationNo) {
+    struct Node* theCardNode = getElementFromTail(0);
+    if(isPlaceableInFoundation(*card, foundationNo)) {
+        if (getElementFromTail(1) != NULL) {
+            getElementFromTail(1)->next = NULL;
+        } else {
+            addHead(NULL, activeHead);
+        }
         int prevActive = activeHead;
         setActiveList(foundationNo);
-        insertAtTail(card);
+        struct Node* tail = getTail();
+        if (tail != NULL) {
+            tail->next = theCardNode;
+            theCardNode->prev = tail;
+        } else {
+            addHead(theCardNode, foundationNo);
+        }
         setActiveList(prevActive);
     }
+
+    /*
+     * if (getElementFromTail(amount) != NULL) {
+            getElementFromTail(amount)->next = NULL;
+        } else {
+            addHead(NULL, fromColumn);
+        }
+        setActiveList(toColumn);
+        struct Node* tail = getTail();
+        if (tail != NULL) {
+            tail->next = fromCard;
+            fromCard->prev = tail;
+        } else {
+            addHead(fromCard, toColumn);
+        }
+     */
 }
 
 #endif

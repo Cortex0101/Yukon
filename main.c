@@ -42,10 +42,10 @@ int main( int argc, char* args[]) {
     setActiveList(1);
     initializeColumnLists();
 
-    placeCard(getCard(1, Clubs).card, 8);
-    placeCard(getCard(1, Hearts).card, 9);
-    placeCard(getCard(1, Spades).card, 10);
-    placeCard(getCard(1, Diamonds).card, 11);
+    //placeCard(getCard(1, Clubs).card, 8);
+    //placeCard(getCard(1, Hearts).card, 9);
+    //placeCard(getCard(1, Spades).card, 10);
+    //placeCard(getCard(1, Diamonds).card, 11);
 
     bool quit = false;
     SDL_Event e;

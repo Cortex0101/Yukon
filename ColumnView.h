@@ -29,6 +29,9 @@ void drawColumn(int column) {
             cardView = getCardView(temp->data);
             cardView.xPos = (COLUMN_HORIZONTAL_SPACING * column) + COLUMN_X;
             cardView.yPos = (COLUMN_VERTICAL_SPACING * i) + COLUMN_Y;
+            if (temp->next == NULL && !temp->data.visible) {
+                temp->data.visible = true;
+            }
             drawCard(&cardView);
             ++i;
         } else {

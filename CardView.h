@@ -1,7 +1,3 @@
-//
-// Created by ldeir on 28-04-2022.
-//
-
 #ifndef YUKON_CARDVIEW_H
 #define YUKON_CARDVIEW_H
 
@@ -65,7 +61,6 @@ void loadCardTextureAndGenerateViews() {
 }
 
 // Generates a random card
-// Just for testing, remove later
 CardView getCard(int value, Suit suit) {
     CardView cardView;
     cardView.width = CARDVIEW_WIDTH;

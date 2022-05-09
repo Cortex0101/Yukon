@@ -1,7 +1,3 @@
-//
-// Created by ldeir on 06-05-2022.
-//
-
 #ifndef YUKON_COLUMNMOUSEINTERACTION_H
 #define YUKON_COLUMNMOUSEINTERACTION_H
 
@@ -66,7 +62,7 @@ int getCardBasedOnXY(int mouseXPos, int mouseYPos) {
         return cardNo;
     } else {
         printf("column: %c, card: %c", column + '0', 0 + '0');
-        return 0;
+        return numCardsInColumn;
     }
 }
 
@@ -102,9 +98,9 @@ int getFoundationBasedOnMouseYPos(int mouseYPos) {
 }
 
 void columnHandleMouseEvent(SDL_Event* mouseEvent) {
-    if (mouseEvent->type == SDL_MOUSEBUTTONDOWN) {
+    if (mouseEvent->type == SDL_MOUSEBUTTONDOWN && mouseButtonDown == false) {
         mouseButtonDown = true;
-    } else if (mouseEvent->type == SDL_MOUSEBUTTONUP) {
+    } else if (mouseEvent->type == SDL_MOUSEBUTTONDOWN) {
         mouseButtonDown = false;
         int mousePosX, mousePosY;
         SDL_GetMouseState(&mousePosX, &mousePosY);

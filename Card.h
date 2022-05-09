@@ -1,7 +1,3 @@
-//
-// Created by ldeir on 27-04-2022.
-//
-
 #ifndef YUKON_CARD_H
 #define YUKON_CARD_H
 

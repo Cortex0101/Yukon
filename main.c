@@ -13,8 +13,8 @@
 #include "FoundationView.h"
 #include "gameLogic.h"
 
-const int SCREEN_WIDTH = 1280;
-const int SCREEN_HEIGHT = 720;
+const int SCREEN_WIDTH = 1000;
+const int SCREEN_HEIGHT = 600;
 
 int main( int argc, char* args[]) {
     executable_location = args[0];
@@ -59,7 +59,9 @@ int main( int argc, char* args[]) {
         drawFoundation(10);
         drawFoundation(11);
 
-        if (checkIfAllFoundationsAreFull()) {quitGame();}
+        if (checkIfAllFoundationsAreFull()) {
+            quitGame();
+        }
 
         columnUpdateMouse();
         SDL_RenderPresent( gRenderer );

@@ -1,11 +1,14 @@
 #include "Foundation.h"
 
 bool checkIfAllFoundationsAreFull() {
-    if(stackIsFull(8) && stackIsFull(9) && stackIsFull(10) && stackIsFull(11)) {return true;}
+    if (stackIsFull(8) && stackIsFull(9) && stackIsFull(10) && stackIsFull(11)) {
+        return true;
+    }
     return false;
 }
 
-void quitGame(){
+void quitGame() {
+    printf("You win!!!");
     exit(0);
 }
 

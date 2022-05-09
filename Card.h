@@ -48,4 +48,12 @@ bool cardsSameSuit(const Card* card1, const Card* card2) {
     return card1->suit == card2->suit;
 }
 
+Card getCard(int value, Suit suit, bool visible) {
+    Card card;
+    card.suit = suit;
+    card.value = value;
+    card.visible = visible;
+    return card;
+}
+
 #endif //YUKON_CARD_H

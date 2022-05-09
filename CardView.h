@@ -64,26 +64,14 @@ void loadCardTextureAndGenerateViews() {
     gCardViewRects = getTextureRectsForDeck();
 }
 
-// Generates a random card
-// Just for testing, remove later
-CardView getCard(int value, Suit suit) {
+CardView getCardView(Card card) {
     CardView cardView;
     cardView.width = CARDVIEW_WIDTH;
     cardView.height = CARDVIEW_HEIGHT;
     cardView.xPos = 0;
     cardView.yPos = 0;
-
-    Card card;
-    card.suit = suit;
-    card.value = value;
-    card.visible = true;
     cardView.card = card;
-
     return cardView;
-}
-
-CardView getCardView(Card card) {
-    getCard(card.value, card.suit);
 }
 
 void copyArray(CardView arr[], CardView copy[], int size)

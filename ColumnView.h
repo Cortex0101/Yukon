@@ -21,7 +21,7 @@ void drawColumn(int column) {
     if (temp == NULL)
         return;
 
-    CardView cardView = getCard(temp->data.value, temp->data.suit);
+    CardView cardView = getCardView(temp->data);
     cardView.xPos = (COLUMN_HORIZONTAL_SPACING * column) + COLUMN_X;
     cardView.yPos = (COLUMN_VERTICAL_SPACING * 0) + COLUMN_Y;
     drawCard(&cardView);
@@ -30,7 +30,7 @@ void drawColumn(int column) {
     while (true) {
         if (temp->next != NULL) {
             temp = temp->next;
-            cardView = getCard(temp->data.value, temp->data.suit);
+            cardView = getCardView(temp->data);
             cardView.xPos = (COLUMN_HORIZONTAL_SPACING * column) + COLUMN_X;
             cardView.yPos = (COLUMN_VERTICAL_SPACING * i) + COLUMN_Y;
             drawCard(&cardView);
@@ -51,7 +51,7 @@ void    drawColumnWithOffset(int column, int cardNo, int xOffset, int yOffset) {
 
     int sub = 2;
 
-    CardView cardView = getCard(temp->data.value, temp->data.suit);
+    CardView cardView = getCardView(temp->data);
     if (cardNo == 1) {
         cardView.xPos = xOffset;
         cardView.yPos = (COLUMN_VERTICAL_SPACING * 0) + yOffset;
@@ -68,7 +68,7 @@ void    drawColumnWithOffset(int column, int cardNo, int xOffset, int yOffset) {
     while (true) {
         if (temp->next != NULL) {
             temp = temp->next;
-            cardView = getCard(temp->data.value, temp->data.suit);
+            cardView = getCardView(temp->data);
             if (i >= cardNo) {
                 cardView.xPos = xOffset;
                 cardView.yPos = (COLUMN_VERTICAL_SPACING * (j - sub)) + yOffset;

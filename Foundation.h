@@ -17,7 +17,7 @@ Card getTopCardOfFoundation(int foundationNo) {
         return card;
     }
     setActiveList(prevActive);
-    return getCard(2, Spades).card; // TODO: Return an invalid card...
+    return getCard(2, Spades, true); // TODO: Return an invalid card...
 }
 
 bool stackIsEmpty(int foundationNo) {

@@ -26,7 +26,7 @@ void drawFoundation(int foundation) {
     if (temp == NULL)
         return;
 
-    CardView view = getCard(getTail()->data.value, getTail()->data.suit);
+    CardView view = getCardView(getTail()->data);
     view.xPos = (FOUNDATION_HORIZONTAL_SPACING * 8) + FOUNDATION_X;
     view.yPos = FOUNDATION_Y * (15 * foundation) + COLUMN_Y;
     drawCard(&view);

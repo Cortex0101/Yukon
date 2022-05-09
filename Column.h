@@ -48,55 +48,6 @@ void initializeColumnLists() {
     setActiveList(1);
     insertAtTail(card1);
 
-    /*
-    for (int i = 0; i < 6; ++i) {
-        Card card = getTopCardOfDeck();
-        if (i > 4) {
-            card.visible = false;
-        }
-        setActiveList(2);
-        insertAtTail(card);
-    }
-
-
-    for (int i = 0; i < 7; ++i) {
-        Card card = getTopCardOfDeck();
-        if (i > 5) {
-            card.visible = false;
-        }
-        setActiveList(3);
-        insertAtTail(card);
-    }
-
-    for (int i = 0; i < 8; ++i) {
-        Card card = getTopCardOfDeck();
-        if (i > 6) {
-            card.visible = false;
-        }
-        setActiveList(4);
-        insertAtTail(card);
-    }
-
-    for (int i = 0; i < 9; ++i) {
-        Card card = getTopCardOfDeck();
-        setActiveList(5);
-        insertAtTail(card);
-    }
-
-    for (int i = 0; i < 10; ++i) {
-        Card card = getTopCardOfDeck();
-        setActiveList(6);
-        insertAtTail(card);
-    }
-
-    setActiveList(7);
-    for (int i = 0; i < 11; ++i) {
-        Card card = getTopCardOfDeck();
-        setActiveList(7);
-        insertAtTail(card);
-    }
-    */
-
     insertCardsInColumn(2);
     insertCardsInColumn(3);
     insertCardsInColumn(4);
@@ -186,6 +137,22 @@ int getColumnSize(int column) {
     int size = getSize();
     setActiveList(prevActive);
     return size;
+}
+
+int getAmountOfHiddenCards(int column) {
+    int prevActive = activeHead;
+    setActiveList(column);
+
+    int amountOfHiddenCards = 0;
+    int size = getSize();
+    for (int i = 0; i < size; ++i) {
+        if (!getElementFromTail(i)->data.visible) {
+            ++amountOfHiddenCards;
+        }
+    }
+
+    setActiveList(prevActive);
+    return amountOfHiddenCards;
 }
 
 

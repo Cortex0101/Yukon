@@ -97,6 +97,13 @@ int getFoundationBasedOnMouseYPos(int mouseYPos) {
     }
 }
 
+int maxInt(int a, int b) {
+    if (a > b) {
+        return a;
+    }
+    return b;
+}
+
 void columnHandleMouseEvent(SDL_Event* mouseEvent) {
     if (mouseEvent->type == SDL_MOUSEBUTTONDOWN && mouseButtonDown == false) {
         mouseButtonDown = true;
@@ -106,7 +113,8 @@ void columnHandleMouseEvent(SDL_Event* mouseEvent) {
         SDL_GetMouseState(&mousePosX, &mousePosY);
         printf("%c%", priv_card + '0');
         if (getColumnBasedOnMouseXPos(mousePosX) != 9) {
-            moveCards(priv_column, getColumnBasedOnMouseXPos(mousePosX), getColumnSize(priv_column) - (priv_card - 1));
+            printf("%c", getAmountOfHiddenCards(priv_column) + '0');
+            moveCards(priv_column, getColumnBasedOnMouseXPos(mousePosX), getColumnSize(priv_column) - maxInt(priv_card - 1, getAmountOfHiddenCards(priv_column)));
         } else {
             if (priv_card == getColumnSize(priv_column)) {
                 int foundation = getFoundationBasedOnMouseYPos(mousePosY);
@@ -128,7 +136,7 @@ void columnUpdateMouse() {
             priv_card = getCardBasedOnXY(mousePosX, mousePosY);
             callOnce = true;
         }
-        drawColumnWithOffset(priv_column, priv_card, mousePosX, mousePosY);
+        drawColumnWithOffset(priv_column, maxInt(priv_card, getAmountOfHiddenCards(priv_column) + 1), mousePosX, mousePosY);
     } else {
         callOnce = false;
     }

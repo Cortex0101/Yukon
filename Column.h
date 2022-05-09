@@ -17,6 +17,17 @@ struct Node* column7Head = NULL;
 
 struct Node* columns[7];
 
+void insertCardsInColumn(int column) {
+    for (int i = 0; i < column + 4; ++i) {
+        Card card = getTopCardOfDeck();
+        if (i + 1 < column) {
+            card.visible = false;
+        }
+        setActiveList(column);
+        insertAtTail(card);
+    }
+}
+
 void initializeColumnLists() {
     addHead(column1Head, 1);
     addHead(column2Head, 2);
@@ -37,8 +48,12 @@ void initializeColumnLists() {
     setActiveList(1);
     insertAtTail(card1);
 
+    /*
     for (int i = 0; i < 6; ++i) {
         Card card = getTopCardOfDeck();
+        if (i > 4) {
+            card.visible = false;
+        }
         setActiveList(2);
         insertAtTail(card);
     }
@@ -46,12 +61,18 @@ void initializeColumnLists() {
 
     for (int i = 0; i < 7; ++i) {
         Card card = getTopCardOfDeck();
+        if (i > 5) {
+            card.visible = false;
+        }
         setActiveList(3);
         insertAtTail(card);
     }
 
     for (int i = 0; i < 8; ++i) {
         Card card = getTopCardOfDeck();
+        if (i > 6) {
+            card.visible = false;
+        }
         setActiveList(4);
         insertAtTail(card);
     }
@@ -74,6 +95,14 @@ void initializeColumnLists() {
         setActiveList(7);
         insertAtTail(card);
     }
+    */
+
+    insertCardsInColumn(2);
+    insertCardsInColumn(3);
+    insertCardsInColumn(4);
+    insertCardsInColumn(5);
+    insertCardsInColumn(6);
+    insertCardsInColumn(7);
 }
 
 // Check if 'card' is placeable in the column with the head 'columnHead'

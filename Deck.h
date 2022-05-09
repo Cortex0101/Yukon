@@ -15,6 +15,7 @@ void createDeck() {
             Card *card = (Card *) malloc(sizeof(Card));
             card->value = i;
             card->suit = j;
+            card->visible = true;
             insertAtTail(*card);
         }
     }
@@ -25,6 +26,7 @@ Card getTopCardOfDeck() {
     Card *card = (Card *) malloc(sizeof(Card));
     card->suit = getTail()->data.suit;
     card->value = getTail()->data.value;
+    card->visible = getTail()->data.visible;
     if (getTail()->prev != NULL) {
         getTail()->prev->next = NULL;
     }

@@ -87,7 +87,14 @@ void drawCard(const CardView* cardView) {
     cardDimension.x = cardView->xPos;
     cardDimension.y = cardView->yPos;
 
-    SDL_RenderCopy(gRenderer, gCardDeck, &gCardViewRects[cardView->card.suit][cardView->card.value - 1], &cardDimension);
+    if (cardView->card.visible) {
+        SDL_RenderCopy(gRenderer, gCardDeck, &gCardViewRects[cardView->card.suit][cardView->card.value - 1], &cardDimension);
+    } else {
+        SDL_SetRenderDrawColor(gRenderer, 0x0c, 0x04, 0x74, 0xFF);
+        SDL_RenderFillRect(gRenderer, &cardDimension);
+        SDL_SetRenderDrawColor(gRenderer, 0x60, 0xEE, 0xF8, 0xFF);
+        SDL_RenderDrawRect(gRenderer, &cardDimension);
+    }
 }
 
 #endif //YUKON_CARDVIEW_H

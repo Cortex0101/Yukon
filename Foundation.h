@@ -4,6 +4,7 @@
 #ifndef YUKON_FOUNDATION_H
 #define YUKON_FOUNDATION_H
 
+//uses the foundation number to give each foundation a unique suit
 int getSuit(int foundationNo) {
     return foundationNo - 8;
 }
@@ -17,7 +18,7 @@ Card getTopCardOfFoundation(int foundationNo) {
         return card;
     }
     setActiveList(prevActive);
-    return getCard(2, Spades).card; // TODO: Return an invalid card...
+    return getCard(2, Spades, true); // TODO: Return an invalid card...
 }
 
 bool stackIsEmpty(int foundationNo) {
@@ -72,22 +73,6 @@ void placeCard(Card* card, int foundationNo) {
         }
         setActiveList(prevActive);
     }
-
-    /*
-     * if (getElementFromTail(amount) != NULL) {
-            getElementFromTail(amount)->next = NULL;
-        } else {
-            addHead(NULL, fromColumn);
-        }
-        setActiveList(toColumn);
-        struct Node* tail = getTail();
-        if (tail != NULL) {
-            tail->next = fromCard;
-            fromCard->prev = tail;
-        } else {
-            addHead(fromCard, toColumn);
-        }
-     */
 }
 
 #endif

@@ -1,7 +1,3 @@
-//
-// Created by ldeir on 29-04-2022.
-//
-
 #ifndef YUKON_COLUMNVIEW_H
 #define YUKON_COLUMNVIEW_H
 
@@ -15,24 +11,30 @@ const int COLUMN_HORIZONTAL_SPACING = (88 / 4) + 88;
 
 void drawColumn(int column) {
     setActiveList(column);
-    column -= 1; // simple hack..
+    column -= 1; //offsets the column by one to account for head 0 being the head of the deck
     struct Node* temp = heads[activeHead];
 
     if (temp == NULL)
         return;
 
-    CardView cardView = getCard(temp->data.value, temp->data.suit);
+    CardView cardView = getCardView(temp->data);
     cardView.xPos = (COLUMN_HORIZONTAL_SPACING * column) + COLUMN_X;
     cardView.yPos = (COLUMN_VERTICAL_SPACING * 0) + COLUMN_Y;
+    if (temp->next == NULL && !temp->data.visible) {
+        temp->data.visible = true;
+    }
     drawCard(&cardView);
 
     int i = 1;
     while (true) {
         if (temp->next != NULL) {
             temp = temp->next;
-            cardView = getCard(temp->data.value, temp->data.suit);
+            cardView = getCardView(temp->data);
             cardView.xPos = (COLUMN_HORIZONTAL_SPACING * column) + COLUMN_X;
             cardView.yPos = (COLUMN_VERTICAL_SPACING * i) + COLUMN_Y;
+            if (temp->next == NULL && !temp->data.visible) {
+                temp->data.visible = true;
+            }
             drawCard(&cardView);
             ++i;
         } else {
@@ -41,9 +43,9 @@ void drawColumn(int column) {
     }
 }
 
-void    drawColumnWithOffset(int column, int cardNo, int xOffset, int yOffset) {
+void drawColumnWithOffset(int column, int cardNo, int xOffset, int yOffset) {
     setActiveList(column);
-    column -= 1; // simple hack..
+    column -= 1;  //offsets the column by one to account for head 0 being the head of the deck
     struct Node *temp = heads[activeHead];
 
     if (temp == NULL)
@@ -51,7 +53,7 @@ void    drawColumnWithOffset(int column, int cardNo, int xOffset, int yOffset) {
 
     int sub = 2;
 
-    CardView cardView = getCard(temp->data.value, temp->data.suit);
+    CardView cardView = getCardView(temp->data);
     if (cardNo == 1) {
         cardView.xPos = xOffset;
         cardView.yPos = (COLUMN_VERTICAL_SPACING * 0) + yOffset;
@@ -68,7 +70,7 @@ void    drawColumnWithOffset(int column, int cardNo, int xOffset, int yOffset) {
     while (true) {
         if (temp->next != NULL) {
             temp = temp->next;
-            cardView = getCard(temp->data.value, temp->data.suit);
+            cardView = getCardView(temp->data);
             if (i >= cardNo) {
                 cardView.xPos = xOffset;
                 cardView.yPos = (COLUMN_VERTICAL_SPACING * (j - sub)) + yOffset;

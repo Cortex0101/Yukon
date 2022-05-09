@@ -1,7 +1,3 @@
-//
-// Created by ldeir on 28-04-2022.
-//
-
 #ifndef YUKON_COLUMN_H
 #define YUKON_COLUMN_H
 
@@ -21,6 +17,17 @@ struct Node* column7Head = NULL;
 
 struct Node* columns[7];
 
+void insertCardsInColumn(int column) {
+    for (int i = 0; i < column + 4; ++i) {
+        Card card = getTopCardOfDeck();
+        if (i + 1 < column) {
+            card.visible = false;
+        }
+        setActiveList(column);
+        insertAtTail(card);
+    }
+}
+
 void initializeColumnLists() {
     addHead(column1Head, 1);
     addHead(column2Head, 2);
@@ -37,40 +44,16 @@ void initializeColumnLists() {
     columns[5] = column6Head;
     columns[6] = column7Head;
 
+    Card card1 = getTopCardOfDeck();
     setActiveList(1);
-    insertAtTail(removeTopCardOfDeck()->data);
+    insertAtTail(card1);
 
-    setActiveList(2);
-    for (int i = 0; i < 6; ++i) {
-        Card card = removeTopCardOfDeck()->data;
-        insertAtTail(card);
-    }
-
-    setActiveList(3);
-    for (int i = 0; i < 7; ++i) {
-        Card card = removeTopCardOfDeck()->data;
-        insertAtTail(card);
-    }
-
-    setActiveList(4);
-    for (int i = 0; i < 8; ++i) {
-        insertAtTail(removeTopCardOfDeck()->data);
-    }
-
-    setActiveList(5);
-    for (int i = 0; i < 9; ++i) {
-        insertAtTail(removeTopCardOfDeck()->data);
-    }
-
-    setActiveList(6);
-    for (int i = 0; i < 10; ++i) {
-        insertAtTail(removeTopCardOfDeck()->data);
-    }
-
-    setActiveList(7);
-    for (int i = 0; i < 11; ++i) {
-        insertAtTail(removeTopCardOfDeck()->data);
-    }
+    insertCardsInColumn(2);
+    insertCardsInColumn(3);
+    insertCardsInColumn(4);
+    insertCardsInColumn(5);
+    insertCardsInColumn(6);
+    insertCardsInColumn(7);
 }
 
 // Check if 'card' is placeable in the column with the head 'columnHead'
@@ -117,7 +100,7 @@ void moveCardsWithoutRules(int fromColumn, int toColumn, int amount) {
         addHead(fromCard, toColumn);
     }
 }
-
+//checks if the card is moveable, then moves it to the new column
 bool moveCards(int fromColumn, int toColumn, int amount) {
     setActiveList(fromColumn);
     struct Node* fromCard = getElementFromTail(amount - 1);
@@ -154,6 +137,22 @@ int getColumnSize(int column) {
     int size = getSize();
     setActiveList(prevActive);
     return size;
+}
+
+int getAmountOfHiddenCards(int column) {
+    int prevActive = activeHead;
+    setActiveList(column);
+
+    int amountOfHiddenCards = 0;
+    int size = getSize();
+    for (int i = 0; i < size; ++i) {
+        if (!getElementFromTail(i)->data.visible) {
+            ++amountOfHiddenCards;
+        }
+    }
+
+    setActiveList(prevActive);
+    return amountOfHiddenCards;
 }
 
 

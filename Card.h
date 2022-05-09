@@ -1,7 +1,3 @@
-//
-// Created by ldeir on 27-04-2022.
-//
-
 #ifndef YUKON_CARD_H
 #define YUKON_CARD_H
 
@@ -46,6 +42,14 @@ bool isOneGreater(const Card* card1, const Card* card2) {
 
 bool cardsSameSuit(const Card* card1, const Card* card2) {
     return card1->suit == card2->suit;
+}
+
+Card getCard(int value, Suit suit, bool visible) {
+    Card card;
+    card.suit = suit;
+    card.value = value;
+    card.visible = visible;
+    return card;
 }
 
 #endif //YUKON_CARD_H

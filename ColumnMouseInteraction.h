@@ -1,7 +1,3 @@
-//
-// Created by ldeir on 06-05-2022.
-//
-
 #ifndef YUKON_COLUMNMOUSEINTERACTION_H
 #define YUKON_COLUMNMOUSEINTERACTION_H
 
@@ -66,7 +62,7 @@ int getCardBasedOnXY(int mouseXPos, int mouseYPos) {
         return cardNo;
     } else {
         printf("column: %c, card: %c", column + '0', 0 + '0');
-        return 0;
+        return numCardsInColumn;
     }
 }
 
@@ -101,16 +97,24 @@ int getFoundationBasedOnMouseYPos(int mouseYPos) {
     }
 }
 
+int maxInt(int a, int b) {
+    if (a > b) {
+        return a;
+    }
+    return b;
+}
+
 void columnHandleMouseEvent(SDL_Event* mouseEvent) {
-    if (mouseEvent->type == SDL_MOUSEBUTTONDOWN) {
+    if (mouseEvent->type == SDL_MOUSEBUTTONDOWN && mouseButtonDown == false) {
         mouseButtonDown = true;
-    } else if (mouseEvent->type == SDL_MOUSEBUTTONUP) {
+    } else if (mouseEvent->type == SDL_MOUSEBUTTONDOWN) {
         mouseButtonDown = false;
         int mousePosX, mousePosY;
         SDL_GetMouseState(&mousePosX, &mousePosY);
         printf("%c%", priv_card + '0');
         if (getColumnBasedOnMouseXPos(mousePosX) != 9) {
-            moveCards(priv_column, getColumnBasedOnMouseXPos(mousePosX), getColumnSize(priv_column) - (priv_card - 1));
+            printf("%c", getAmountOfHiddenCards(priv_column) + '0');
+            moveCards(priv_column, getColumnBasedOnMouseXPos(mousePosX), getColumnSize(priv_column) - maxInt(priv_card - 1, getAmountOfHiddenCards(priv_column)));
         } else {
             if (priv_card == getColumnSize(priv_column)) {
                 int foundation = getFoundationBasedOnMouseYPos(mousePosY);
@@ -132,7 +136,7 @@ void columnUpdateMouse() {
             priv_card = getCardBasedOnXY(mousePosX, mousePosY);
             callOnce = true;
         }
-        drawColumnWithOffset(priv_column, priv_card, mousePosX, mousePosY);
+        drawColumnWithOffset(priv_column, maxInt(priv_card, getAmountOfHiddenCards(priv_column) + 1), mousePosX, mousePosY);
     } else {
         callOnce = false;
     }

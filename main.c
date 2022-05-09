@@ -39,7 +39,7 @@ int main( int argc, char* args[]) {
         while( SDL_PollEvent( &e ) != 0 ) {
             if( e.type == SDL_QUIT ) {
                 quit = true;
-            } else if (e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP || SDL_MOUSEMOTION) {
+            } else if (e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP || e.type == SDL_MOUSEMOTION) {
                 columnHandleMouseEvent(&e);
             }
         }

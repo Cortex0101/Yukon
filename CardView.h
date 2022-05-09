@@ -1,7 +1,3 @@
-//
-// Created by ldeir on 28-04-2022.
-//
-
 #ifndef YUKON_CARDVIEW_H
 #define YUKON_CARDVIEW_H
 

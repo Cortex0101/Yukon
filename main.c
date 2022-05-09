@@ -42,18 +42,13 @@ int main( int argc, char* args[]) {
     setActiveList(1);
     initializeColumnLists();
 
-    //placeCard(getCard(1, Clubs).card, 8);
-    //placeCard(getCard(1, Hearts).card, 9);
-    //placeCard(getCard(1, Spades).card, 10);
-    //placeCard(getCard(1, Diamonds).card, 11);
-
     bool quit = false;
     SDL_Event e;
     while( !quit ) {
         while( SDL_PollEvent( &e ) != 0 ) {
             if( e.type == SDL_QUIT ) {
                 quit = true;
-            } else if (e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP || SDL_MOUSEMOTION) {
+            } else if (e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP || e.type == SDL_MOUSEMOTION) {
                 columnHandleMouseEvent(&e);
             }
         }

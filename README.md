@@ -4,7 +4,7 @@
 
 <div align="center">
 
-![alt text](https://github.com/Cortex0101/Yukon/tree/main/ressources/screenshot.png)
+![alt text](https://raw.githubusercontent.com/Cortex0101/Yukon/main/ressources/screenshot.png)
   
 </div>
 

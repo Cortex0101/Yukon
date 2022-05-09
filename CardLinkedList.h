@@ -1,7 +1,3 @@
-//
-// Created by ldeir on 30-04-2022.
-//
-
 #ifndef YUKON_CARDLINKEDLIST_H
 #define YUKON_CARDLINKEDLIST_H
 
@@ -18,8 +14,12 @@ struct Node  {
 
 struct Node* head; // global variable - pointer to head node.
 
-struct Node* heads[20];
-
+/*
+ * index 0 is head of deck
+ * index 1-7 is head of columns
+ * index 8-11 is head of foundations
+ */
+struct Node* heads[12];
 int activeHead;
 
 void addHead(struct Node* newHead, int i) {
@@ -69,6 +69,7 @@ void insertAtTail(Card card) {
     temp->next = newNode;
     newNode->prev = temp;
 }
+//returns the head of the linked list
 struct Node* getHead() {
     struct Node* temp = heads[activeHead];
     if (temp == NULL) {
@@ -83,6 +84,7 @@ struct Node* getHead() {
     }
 }
 
+//returns the tail of the linked list
 struct Node* getTail() {
     struct Node* temp = heads[activeHead];
     if (temp == NULL) {
@@ -97,9 +99,10 @@ struct Node* getTail() {
     }
 }
 
-struct Node* getElementFromHead(int j) {
+// returns the node that is the n'th in the list, starting from the head
+struct Node* getElementFromHead(int offsetFromHead) {
     struct Node* temp = getHead();
-    for (int i = 0; i < j; ++i) {
+    for (int i = 0; i < offsetFromHead; ++i) {
         if (temp != NULL) {
             temp = temp->next;
         } else {
@@ -110,9 +113,10 @@ struct Node* getElementFromHead(int j) {
     return temp;
 }
 
-struct Node* getElementFromTail(int j) {
+// returns the node that is the n'th in the list, starting from the tail
+struct Node* getElementFromTail(int offsetFromTail) {
     struct Node* temp = getTail();
-    for (int i = 0; i < j; ++i) {
+    for (int i = 0; i < offsetFromTail; ++i) {
         if (temp != NULL) {
             temp = temp->prev;
         } else {
@@ -131,39 +135,6 @@ int getSize() {
         temp = temp->next;
     }
     return i;
-}
-
-//Prints all the elements in linked list in forward traversal order
-void print(int activeList) {
-    setActiveList(activeList);
-    struct Node* temp = heads[activeHead];
-    int i = 0;
-    printf("Double Linked List Consists of: \n");
-    while(temp != NULL) {
-        i++;
-        printf("%d of %s \n", temp->data.value, CARD_SUITS_STRING[temp->data.suit]);
-        temp = temp->next;
-
-    }
-    printf("%d cards total", i);
-    printf("\n");
-}
-
-//Prints all elements in linked list in reverse traversal order.
-void reversePrint() {
-    struct Node* temp = heads[activeHead];
-    if(temp == NULL) return; // empty list, exit
-    // Going to last Node
-    while(temp->next != NULL) {
-        temp = temp->next;
-    }
-    // Traversing backward using prev pointer
-    printf("Reverse: ");
-    while(temp != NULL) {
-        printf("%d%d ", temp->data.suit, temp->data.value);
-        temp = temp->prev;
-    }
-    printf("\n");
 }
 
 #endif //YUKON_CARDLINKEDLIST_H

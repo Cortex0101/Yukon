@@ -1,7 +1,3 @@
-//
-// Created by ldeir on 29-04-2022.
-//
-
 #ifndef YUKON_COLUMNVIEW_H
 #define YUKON_COLUMNVIEW_H
 
@@ -15,7 +11,7 @@ const int COLUMN_HORIZONTAL_SPACING = (88 / 4) + 88;
 
 void drawColumn(int column) {
     setActiveList(column);
-    column -= 1; // simple hack..
+    column -= 1; //offsets the column by one to account for head 0 being the head of the deck
     struct Node* temp = heads[activeHead];
 
     if (temp == NULL)
@@ -41,9 +37,9 @@ void drawColumn(int column) {
     }
 }
 
-void    drawColumnWithOffset(int column, int cardNo, int xOffset, int yOffset) {
+void drawColumnWithOffset(int column, int cardNo, int xOffset, int yOffset) {
     setActiveList(column);
-    column -= 1; // simple hack..
+    column -= 1;  //offsets the column by one to account for head 0 being the head of the deck
     struct Node *temp = heads[activeHead];
 
     if (temp == NULL)

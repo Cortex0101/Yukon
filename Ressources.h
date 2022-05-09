@@ -1,7 +1,3 @@
-//
-// Created by ldeir on 28-04-2022.
-//
-
 #ifndef YUKON_RESSOURCES_H
 #define YUKON_RESSOURCES_H
 
@@ -9,6 +5,7 @@
 #include <stdio.h>
 #include <limits.h>
 #include <string.h>
+#include <SDL_image.h>
 
 char* executable_location;
 char* resources_folder;
